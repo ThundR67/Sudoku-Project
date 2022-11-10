@@ -48,23 +48,43 @@ class UI:
         pygame.draw.rect(self.screen, color, (coordinates[0], coordinates[1], size[0], size[1]))
 
         font = pygame.font.SysFont("monospace", 50, bold=True)
-        label = font.render(text, True, WHITE)
+        label = font.render(text.upper(), True, WHITE)
 
         self.screen.blit(label, (coordinates[0] + (size[0] - label.get_width()) / 2, coordinates[1] + (size[1] - label.get_height()) / 2))
 
-    def main(self):
-        """Main loop."""
-        self.handle_events()
 
+    def show_intro_screen(self):
+        """Shows the intro screen."""
         self.set_background_image("background.jpg")
 
         self.show_text("Welcome to Sudoku", 70, BLACK, (45, 50), bold=True)
-
         self.show_text("Select Game Mode:", 50, BLACK, (160, 600), bold=True)
 
         self.show_button("Easy", (50, 700), (200, 100))
         self.show_button("Medium", (300, 700), (200, 100))
         self.show_button("Hard", (550, 700), (200, 100))
+
+    def show_win_screen(self):
+        """Shows the win screen."""
+        self.set_background_image("background.jpg")
+
+        self.show_text("Game Won!", 100, BLACK, (150, 300), bold=True)
+
+        self.show_button("EXIT", (300, 500), (200, 100))
+
+    def show_lose_screen(self):
+        """Shows the lose screen."""
+        self.set_background_image("background.jpg")
+
+        self.show_text("Game Over :(", 70, BLACK, (150, 300), bold=True)
+
+        self.show_button("RESTART", (270, 500), (250, 100))
+
+    def main(self):
+        """Main loop."""
+        self.handle_events()
+
+        self.show_lose_screen()
 
         self.clock.tick(60)
         pygame.display.update()
