@@ -92,6 +92,7 @@ class Board:
             for j in range(9):
                 if self.cell_array[i][j].get_sketched_value() != 0:
                     self.cell_array[i][j].set_cell_value(0)
+                    self.cell_array[i][j].set_sketched_value(0)
 
     def find_empty(self):
         for i in range(9):

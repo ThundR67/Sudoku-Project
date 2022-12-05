@@ -157,7 +157,9 @@ class UI:
 
         self.show_button("RESET", (50, 650), (200, 100))
         if self.button_clicked(pygame.Rect(50, 650, 200, 100)):
-            pass
+            self.board.reset_to_original()
+            self.board.draw()
+
 
         self.show_button("RESTART", (290, 650), (220, 100))
         if self.button_clicked(pygame.Rect(300, 650, 200, 100)):
