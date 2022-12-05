@@ -1,7 +1,9 @@
 import pygame
 from sudoku_generator import SudokuGenerator
 from cell import Cell
+
 class Board:
+    """Class to handle and represent the board."""
     selected_cell = [0,0]
     def __init__(self, width, height, screen, difficulty):
         self.width = width
@@ -27,6 +29,7 @@ class Board:
 
 
     def draw(self):
+        """Draws the board with all its cell"""
         font = pygame.font.SysFont("monospace", 40, bold=True)
         for i in range(9):
             for j in range(9):
@@ -51,12 +54,15 @@ class Board:
 
 
     def select(self, row, col):
+        """Selects the cell at the given row and column"""
         self.selected_cell = [row,col]
 
     def get_selected(self):
+        """Returns the selected cells (row, col) coordinates"""
         return self.selected_cell
 
     def select_move(self, direction):
+        """Moves selected cell in the given direction"""
         if direction == "UP" and self.selected_cell[0] !=0:
             self.selected_cell[0] -=1
         elif direction == "DOWN" and self.selected_cell[0] !=8:
@@ -72,6 +78,7 @@ class Board:
         pass
 
     def clear(self):
+        """Clears the selected cell"""
         if self.cell_array[self.selected_cell[0]][self.selected_cell[1]].get_cell_value() == self.cell_array[self.selected_cell[0]][self.selected_cell[1]].get_sketched_value():
             self.cell_array[self.selected_cell[0]][self.selected_cell[1]].set_cell_value(0)
             self.cell_array[self.selected_cell[0]][self.selected_cell[1]].set_sketched_value(0)
@@ -79,15 +86,18 @@ class Board:
             self.cell_array[self.selected_cell[0]][self.selected_cell[1]].set_sketched_value(0)
 
     def sketch(self, value):
+        """Sketches the given value in the selected cell"""
         if self.cell_array[self.selected_cell[0]][self.selected_cell[1]].get_cell_value() == 0:
             self.cell_array[self.selected_cell[0]][self.selected_cell[1]].set_sketched_value(value)
 
     def place_number(self):
+        """Places the sketched number in the selected cell"""
         value = self.cell_array[self.selected_cell[0]][self.selected_cell[1]].get_sketched_value()
         if self.cell_array[self.selected_cell[0]][self.selected_cell[1]].get_cell_value() == 0:
             self.cell_array[self.selected_cell[0]][self.selected_cell[1]].set_cell_value(value)
 
     def reset_to_original(self):
+        """Resets the board to the original board"""
         for i in range(9):
             for j in range(9):
                 if self.cell_array[i][j].get_sketched_value() != 0:
@@ -95,6 +105,7 @@ class Board:
                     self.cell_array[i][j].set_sketched_value(0)
 
     def find_empty(self):
+        """Finds an empty cell in the board"""
         for i in range(9):
             for j in range(9):
                 if self.cell_array[i][j].get_cell_value() == 0:
@@ -102,6 +113,7 @@ class Board:
         return False
 
     def check_board(self):
+        """Checks if the board is solved"""
         for i in range(9):
             for j in range(9):
                 if self.cell_array[i][j].get_cell_value() != self.solved_board[i][j]:

@@ -93,6 +93,7 @@ class UI:
         self.screen.blit(label, (coordinates[0] + (size[0] - label.get_width()) / 2, coordinates[1] + (size[1] - label.get_height()) / 2))
 
     def button_clicked(self, button_rect):
+        """Checks if a button is clicked."""
         mouse = pygame.mouse.get_pos()
         if button_rect.collidepoint(mouse):
             if pygame.mouse.get_pressed()[0] == 1 and self.mouse_clicked == False:
@@ -113,6 +114,10 @@ class UI:
         self.show_button("Easy", (50, 650), (200, 100))
         if self.button_clicked(pygame.Rect(50, 650, 200, 100)):
             self.board = Board(9,9,self.screen,30)
+
+            for row in self.board.solved_board:
+                print(row)
+
             self.current_screen = "game"
 
         self.show_button("Medium", (300, 650), (200, 100))
@@ -147,6 +152,7 @@ class UI:
             self.current_screen = "intro"
 
     def show_game_in_progress_screen(self):
+        """Shows the game in progress screen."""
         self.screen.fill(LIGHT_BLUE)
         self.board.draw()
 
@@ -178,6 +184,7 @@ class UI:
 
 
     def screen_switcher(self):
+        """Switches between the screens."""
         if self.current_screen == "intro":
             self.show_intro_screen()
         elif self.current_screen == "game":

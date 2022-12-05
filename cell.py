@@ -9,13 +9,17 @@ class Cell:
         self.screen = screen
 
     def set_cell_value(self,value):
+        """Sets the confirmed value of the cell"""
         self.value = value
 
     def get_cell_value(self):
+        """Gets the confirmed value of the cell"""
         return self.value
 
     def set_sketched_value(self, value):
+        """Sets the sketched value of the cell"""
         self.sketched_value = value
 
     def get_sketched_value(self):
+        """Gets the sketched value of the cell"""
         return self.sketched_value
